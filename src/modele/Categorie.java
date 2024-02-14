@@ -121,7 +121,7 @@ public class Categorie {
     public boolean modificationCategorie() {
         try {
             Connection connection = Database.getConnection();
-            String sql ="UPDATE categorie SET nom = ?, description = ? WHERE idCategorie = ?";
+            String sql = "UPDATE categorie SET nom = ?, description = ? WHERE idCategorie = ?";
             PreparedStatement sqlPrepare = connection.prepareStatement(sql);
             sqlPrepare.setString(1, this.nom);
             sqlPrepare.setString(2, this.description);
@@ -132,6 +132,29 @@ public class Categorie {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean verificationCategorie() {
+        try {
+            Connection connection = Database.getConnection();
+            String sql = "SELECT * FROM categorie WHERE nom = ? ";
+            PreparedStatement sqlPrepare = connection.prepareStatement(sql);
+            sqlPrepare.setString(1, this.nom);
+            ResultSet resultat = sqlPrepare.executeQuery();
+            if (resultat.next()){
+                return true;
+            }else{
+                return false;
+            }
+            // return resultat.next(); le moyen le plus court pour la condition 
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return false;
+
     }
 
     //Méthode pour renommer l'affiche de l'objet Catégorie parr le nom de la categorie

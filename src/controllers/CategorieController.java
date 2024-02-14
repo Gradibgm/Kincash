@@ -68,35 +68,39 @@ public class CategorieController implements Initializable {
             return;
         }
         String description = txtDescription.getText();
-        /* if (description.isEmpty()) {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez saisir le nom");
-            alert.setHeaderText(null);
-            alert.showAndWait();
-            return;*/
 
-        Categorie categorie = new Categorie(nom, description);
-        boolean insertion = categorie.insertionCategorie();
-        if (insertion == true) {
-            //Alert info
+        Categorie verifcation = new Categorie(nom, description);
+        boolean verifier = verifcation.verificationCategorie();
+        if (verifier != true) {
+            Categorie categorie = new Categorie(nom, description);
+            boolean insertion = categorie.insertionCategorie();
+            if (insertion == true) {
+                //Alert info
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Categorie");
+                alert.setContentText("Une categorie a été ajoutée !");
+                alert.setHeaderText(null);
+                alert.showAndWait();
+
+                txtDescription.setText("");
+                txtNom.setText("");
+
+                //méthode pour actualisé
+                refresh();
+
+            } else {
+                //Alert erreur
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Categorie");
+                alert.setContentText("Une erreur s'est produite, veuillez recommencer");
+                alert.setHeaderText(null);
+                alert.showAndWait();
+            }
+        } else {
+            //System.out.println("Erreur");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Categorie");
-            alert.setContentText("Une categorie a été ajoutée !");
-            alert.setHeaderText(null);
-            alert.showAndWait();
-
-            txtDescription.setText("");
-            txtNom.setText("");
-
-            //méthode pour actualisé
-            refresh();
-
-        } else {
-            //Alert erreur
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Categorie");
-            alert.setContentText("Une erreur s'est produite, veuillez recommencer");
+            alert.setContentText("la Categorie " + nom + " existe déjà");
             alert.setHeaderText(null);
             alert.showAndWait();
         }
@@ -175,12 +179,11 @@ public class CategorieController implements Initializable {
             refresh();
             txtNom.setText("");
             txtDescription.setText("");
-            
+
             btnModifier.setVisible(false);
             btnAnnuler.setVisible(false);
             btnEnregistrer.setVisible(true);
-            
-            
+
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Modification");

@@ -5,6 +5,9 @@
  */
 package modele;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 /**
  *
  * @author MEGA
@@ -12,15 +15,15 @@ package modele;
 public class Article {
     private int idArticle;
     private String nom;
-    private String prix;
+    private double prix;
     private String code;
-    private String quantite;
+    private int quantite;
     private Categorie categorie;
 
     public Article() {
     }
 
-    public Article(String nom, String prix, String code, String quantite, Categorie categorie) {
+    public Article(String nom, double prix, String code, int quantite, Categorie categorie) {
         this.nom = nom;
         this.prix = prix;
         this.code = code;
@@ -28,7 +31,7 @@ public class Article {
         this.categorie = categorie;
     }
 
-    public Article(int idArticle, String nom, String prix, String code, String quantite, Categorie categorie) {
+    public Article(int idArticle, String nom, double prix, String code, int quantite, Categorie categorie) {
         this.idArticle = idArticle;
         this.nom = nom;
         this.prix = prix;
@@ -53,11 +56,11 @@ public class Article {
         this.nom = nom;
     }
 
-    public String getPrix() {
+    public double getPrix() {
         return prix;
     }
 
-    public void setPrix(String prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 
@@ -69,11 +72,11 @@ public class Article {
         this.code = code;
     }
 
-    public String getQuantite() {
+    public int getQuantite() {
         return quantite;
     }
 
-    public void setQuantite(String quantite) {
+    public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
 
