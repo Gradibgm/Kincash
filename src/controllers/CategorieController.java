@@ -217,6 +217,8 @@ public class CategorieController implements Initializable {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
 
     }
+    
+    
 
     //Méthode pour actualiser notre TableView Categorie
     public void refresh() {

@@ -33,6 +33,8 @@ public class TauxController implements Initializable {
                return;
                  
            }
+
+           
            // on place le block try....catch pour se prevenir des mauvaises conversion venant
            try {
                double montantConverti=Double.parseDouble(montant);
