@@ -26,7 +26,7 @@ public class TauxController implements Initializable {
        String montant = txtMontant.getText();
            if (montant.isEmpty()) {
               Alert alert = new Alert(Alert.AlertType.ERROR);
-              alert.setTitle("CTAUX");
+              alert.setTitle("TAUX");
               alert.setContentText("vous avez mis a jour le Taux");
               alert.setHeaderText(null);
               alert.showAndWait();
