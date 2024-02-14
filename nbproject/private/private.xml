@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/modele/Client.java</file>
+            <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/controllers/ArticleController.java</file>
+            <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/controllers/UtilisateurController.java</file>
             <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/modele/Categorie.java</file>
             <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/controllers/ClientController.java</file>
             <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/controllers/CategorieController.java</file>
-            <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/controllers/FenetrePrincipaleController.java</file>
+            <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/controllers/LoginController.java</file>
+            <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/modele/Article.java</file>
+            <file>file:/C:/Users/omombo/Documents/NetBeansProjects/KinCash/src/controllers/TauxController.java</file>
         </group>
     </open-files>
 </project-private>
