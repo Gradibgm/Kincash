@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import modele.Article;
 import modele.Categorie;
 
 /**

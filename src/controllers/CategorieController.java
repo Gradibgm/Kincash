@@ -61,11 +61,6 @@ public class CategorieController implements Initializable {
         String nom = txtNom.getText();
         if (nom.isEmpty()) {
             showArlertError("veuillez saisir le nom", "champs vide");
-           /* Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez saisir le nom");
-            alert.setHeaderText(null);
-            alert.showAndWait();*/
             return;
         }
         String description = txtDescription.getText();
@@ -78,11 +73,6 @@ public class CategorieController implements Initializable {
             if (insertion == true) {
                 //Alert info
                 showArlertInformation("Une categorie a été ajoutée !", "Categorie");
-                /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Categorie");
-                alert.setContentText("Une categorie a été ajoutée !");
-                alert.setHeaderText(null);
-                alert.showAndWait();*/
 
                 txtDescription.setText("");
                 txtNom.setText("");
@@ -93,21 +83,10 @@ public class CategorieController implements Initializable {
             } else {
                 //Alert erreur
                 showArlertError("Une erreur s'est produite, veuillez recommencer", "Categorie");
-
-                /*Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Categorie");
-                alert.setContentText("Une erreur s'est produite, veuillez recommencer");
-                alert.setHeaderText(null);
-                alert.showAndWait();*/
             }
         } else {
             //System.out.println("Erreur");
             showArlertInformation("la Categorie " + nom + " existe déjà", "Categorie");
-            /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Categorie");
-            alert.setContentText("la Categorie " + nom + " existe déjà");
-            alert.setHeaderText(null);
-            alert.showAndWait();*/
         }
 
     }
@@ -162,11 +141,6 @@ public class CategorieController implements Initializable {
         String description = txtDescription.getText();
         if (nom.isEmpty()) {
             showArlertError("veuillez saisir le nom", "champs vide");
-            /*Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez saisir le nom");
-            alert.setHeaderText(null);
-            alert.showAndWait();*/
             return;
         }
 
@@ -193,13 +167,7 @@ public class CategorieController implements Initializable {
             btnEnregistrer.setVisible(true);
 
         } else {
-
             showArlertError("La modification a échouée!", "Modification");
-            /*Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Modification");
-            alert.setContentText("La modification a échouée!");
-            alert.setHeaderText(null);
-            alert.showAndWait();*/
         }
 
     }
@@ -213,7 +181,8 @@ public class CategorieController implements Initializable {
         btnAnnuler.setVisible(false);
         btnEnregistrer.setVisible(true);
     }
-//méthode d'affiche des alerts error
+    
+    //méthode d'affiche des alerts error
     private void showArlertError(String description, String titre) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(titre);

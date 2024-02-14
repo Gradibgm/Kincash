@@ -7,6 +7,7 @@ package modele;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -19,6 +20,9 @@ public class Article {
     private String code;
     private int quantite;
     private Categorie categorie;
+    
+    Categorie categories;
+    int idCategorie = categorie.getIdCategorie();
 
     public Article() {
     }
@@ -87,6 +91,48 @@ public class Article {
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+    public boolean verificationArticle() {
+        try {
+            Connection connection = Database.getConnection();
+            String sql = "SELECT * FROM article WHERE nom = ? ";
+            PreparedStatement sqlPrepare = connection.prepareStatement(sql);
+            sqlPrepare.setString(1, this.nom);
+            ResultSet resultat = sqlPrepare.executeQuery();
+            if (resultat.next()){
+                return true;
+            }else{
+                return false;
+            }
+            // return resultat.next(); le moyen le plus court pour la condition 
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        return false;
+
+    }
     
+    public boolean insertionArticle() {
+        try {
+            Connection connection = Database.getConnection();
+            String sql = "INSERT INTO article ( nom, prix, code, quantite, idCategorie) "
+                    + "VALUES(?,?,?,?,?)";
+
+            PreparedStatement sqlPrepare = connection.prepareStatement(sql);
+            sqlPrepare.setString(1, this.nom);
+            sqlPrepare.setDouble(2, this.prix);
+            sqlPrepare.setString(3, this.code);
+            sqlPrepare.setInt(4, this.quantite);
+            sqlPrepare.setInt(5, this.idCategorie);
+            int nombreLigne = sqlPrepare.executeUpdate();
+            return nombreLigne > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
 

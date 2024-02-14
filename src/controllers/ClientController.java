@@ -69,40 +69,24 @@ public class ClientController implements Initializable {
     void enregistrer(ActionEvent event) {
         String nom = txtNom.getText();
         if (nom.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez saisir le nom");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+           showArlertError("veuillez entrée le nom", "champs vide");
             return;
         }
         String telephone = txtTelephone.getText();
         if (telephone.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez saisir le numéro de téléphone");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez entrée le numéro de téléphone", "champs vide");
             return;
         }
 
         String sexe = cmbSexe.getValue();
         if (sexe == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez entrée le sexe");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez entrée le sexe", "champs vide");
             return;
         }
 
         String type = cmbType.getValue();
         if (type == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez entrée le type");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez entrée le type", "champs vide");
             return;
         }
 
@@ -111,11 +95,7 @@ public class ClientController implements Initializable {
 
         if (insertion == true) {
             //Alert info
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Client");
-            alert.setContentText("Un client a été ajouté !");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertInformation("Un client a été ajouté !", "Client");
 
             txtNom.setText("");
             txtTelephone.setText("");
@@ -126,12 +106,7 @@ public class ClientController implements Initializable {
 
         } else {
             //Alert erreur
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Client");
-            alert.setContentText("Une erreur s'est produite, veuillez recommencer");
-            alert.setHeaderText(null);
-            alert.showAndWait();
-
+            showArlertError("Une erreur s'est produite, veuillez recommencer", "Client");
         }
 
     }
@@ -201,52 +176,34 @@ public class ClientController implements Initializable {
     void sauvegarder(ActionEvent event) {
         String nom = txtNom.getText();
         if (nom.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez saisir le nom");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez entrée le nom", "champs vide");
             return;
         }
         String telephone = txtTelephone.getText();
         if (telephone.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez saisir le numéro de téléphone");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez entrée le numéro de téléphone", "champs vide");
             return;
         }
 
         String sexe = cmbSexe.getValue();
         if (sexe == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez entrée le sexe");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+           showArlertError("veuillez entrée le sexe", "champs vide");
             return;
         }
 
         String type = cmbType.getValue();
         if (type == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez entrée le type");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez entrée le type", "champs vide");
             return;
         }
         int idClient = client.getIdClient();
         Client client = new Client(idClient, nom, telephone, sexe, type);
         boolean clientModifier = client.modificationClient();
         if (clientModifier) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Modification");
-            alert.setContentText("La modification a réussi!");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertInformation("La modification a réussi!", "Modification");
+            
             refresh();
+            
             txtNom.setText("");
             txtTelephone.setText("");
             cmbSexe.setValue("");
@@ -257,14 +214,28 @@ public class ClientController implements Initializable {
             btnEnregistrer.setVisible(true);
 
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Modification");
-            alert.setContentText("La modification a échouée!");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("La modification a échouée", "Modification");
         }
     }
-
+    
+    //Méthode d'affiche des alertes
+    private void showArlertError(String description, String titre) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(description);
+        alert.showAndWait();
+    }
+    
+    //Méthode d'affiche des alertes
+    private void showArlertInformation(String description, String titre) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(description);
+        alert.showAndWait();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 

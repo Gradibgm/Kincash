@@ -25,13 +25,8 @@ public class TauxController implements Initializable {
   private  void enregistrer(ActionEvent event) {
        String montant = txtMontant.getText();
            if (montant.isEmpty()) {
-              Alert alert = new Alert(Alert.AlertType.ERROR);
-              alert.setTitle("TAUX");
-              alert.setContentText("vous avez mis a jour le Taux");
-              alert.setHeaderText(null);
-              alert.showAndWait();
+               showArlertError("vous avez mis a jour le Taux", "TAUX");
                return;
-                 
            }
 
            
@@ -42,27 +37,34 @@ public class TauxController implements Initializable {
            Taux taux = new Taux(montantConverti);
           boolean insertion = taux.insertionTaux();
            if (insertion == true) {
-           Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Enregistrement");
-            alert.setContentText("L'enregistrement effectué avec succès!");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+               showArlertInformation("L'enregistrement effectué avec succès!", "Enregistrement");
              }
-         
             txtMontant.setText("");
-           
-           
            
         } catch (Exception e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Montant");
-            alert.setContentText("Veuillez saisir uniquement des valeurs numeriques !");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+               showArlertError("Veuillez saisir uniquement des valeurs numeriques !", "Montant");
             return;
         }
      
+    }
+  
+  //Méthode d'affiche des alertes
+    private void showArlertError(String description, String titre) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(description);
+        alert.showAndWait();
+    }
+    
+    //Méthode d'affiche des alertes
+    private void showArlertInformation(String description, String titre) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(description);
+        alert.showAndWait();
     }
 
    @Override

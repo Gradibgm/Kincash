@@ -50,21 +50,13 @@ public class UtilisateurController implements Initializable {
 
         String password = pwdPassword.getText();
         if (password.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez saisir le mot de passe");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez saisir le mot de passe", "champs vide");
             return;
         }
         System.out.println(password);
         String role = cmbRole.getValue();
         if (role == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("champs vide");
-            alert.setContentText("veuillez selection le bouton");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez selection le bouton", "champs vide");
             return;
         }
         System.out.println(role);
@@ -72,24 +64,34 @@ public class UtilisateurController implements Initializable {
         Utilisateur utilisateur = new Utilisateur(username, password, role);
         boolean insertion = utilisateur.insertionUtilisateur();
         if (insertion == true) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Enregistrement");
-            alert.setContentText("L'enregistrement effectué avec succès!");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertInformation("L'enregistrement effectué avec succès!", "Enregistrement");
 
             txtUsername.setText("");
             pwdPassword.setText("");
             cmbRole.setValue("");
 
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Enregistrement");
-            alert.setContentText("L'enregistrement a échoué, veuillez reprendre.");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("L'enregistrement a échoué, veuillez reprendre.", "Enregistrement");
         }
 
+    }
+    
+    //Méthode d'affiche des alertes
+    private void showArlertError(String description, String titre) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(description);
+        alert.showAndWait();
+    }
+    
+    //Méthode d'affiche des alertes
+    private void showArlertInformation(String description, String titre) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(description);
+        alert.showAndWait();
     }
 
     @Override

@@ -36,11 +36,7 @@ public class LoginController implements Initializable {
     private void seConnecter(ActionEvent event) {
         String username = txtUsername.getText();
         if (username.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Nom d'utilisateur");
-            alert.setContentText("veuillez remplir le champs username");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez remplir le champs username", "Nom d'utilisateur");
             return;
 
         }
@@ -48,11 +44,7 @@ public class LoginController implements Initializable {
 
         String password = pwdPassword.getText();
         if (password.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Mot de passe");
-            alert.setContentText("veuillez remplir le champs password");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("veuillez remplir le champs password", "Mot de passe");
             return;
         }
         System.out.println(password);
@@ -61,14 +53,6 @@ public class LoginController implements Initializable {
         
         boolean connexion = utilisateur.seConnecter();
         if (connexion == true) {
-            
-            /*
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("connexion");
-            alert.setContentText("L'utilisateur existe");
-            alert.setHeaderText(null);
-            alert.showAndWait();
-            return;*/
             try {
                 //1.chargement du fichier fxml
                 Parent fenetrePrincipale = FXMLLoader.load(getClass().getResource("/ui/FenetrePrincipale.fxml"));
@@ -93,15 +77,29 @@ public class LoginController implements Initializable {
             }
             
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Connexion");
-            alert.setContentText("Vos identifiants sont incorrects, veuillez ressayer");
-            alert.setHeaderText(null);
-            alert.showAndWait();
+            showArlertError("Vos identifiants sont incorrects, veuillez ressayer", "Connexion");
             return;
         }
  
         
+    }
+    
+    //Méthode d'affiche des alertes
+    private void showArlertError(String description, String titre) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(description);
+        alert.showAndWait();
+    }
+    
+    //Méthode d'affiche des alertes
+    private void showArlertInformation(String description, String titre) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(description);
+        alert.showAndWait();
     }
 
     @Override
