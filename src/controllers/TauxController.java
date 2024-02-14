@@ -34,7 +34,7 @@ public class TauxController implements Initializable {
            try {
                double montantConverti=Double.parseDouble(montant);
                          
-           Taux taux = new Taux(montantConverti);
+        Taux taux = new Taux(montantConverti);
           boolean insertion = taux.insertionTaux();
            if (insertion == true) {
                showArlertInformation("L'enregistrement effectué avec succès!", "Enregistrement");
