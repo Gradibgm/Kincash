@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,14 +14,13 @@ import java.sql.ResultSet;
  * @author MEGA
  */
 public class Article {
+
     private int idArticle;
     private String nom;
     private double prix;
     private String code;
     private int quantite;
     private Categorie categorie;
-    
-
 
     public Article() {
     }
@@ -90,6 +89,7 @@ public class Article {
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+
     public boolean verificationArticle() {
         try {
             Connection connection = Database.getConnection();
@@ -97,13 +97,13 @@ public class Article {
             PreparedStatement sqlPrepare = connection.prepareStatement(sql);
             sqlPrepare.setString(1, this.nom);
             ResultSet resultat = sqlPrepare.executeQuery();
-            if (resultat.next()){
+            if (resultat.next()) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
             // return resultat.next(); le moyen le plus court pour la condition 
-            
+
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -112,7 +112,7 @@ public class Article {
         return false;
 
     }
-    
+
     public boolean insertionArticle() {
         try {
             Connection connection = Database.getConnection();
@@ -133,5 +133,46 @@ public class Article {
         }
         return false;
     }
-}
 
+    public boolean suppressionArticle() {
+        try {
+            Connection connection = Database.getConnection();
+            String sql = "DELETE FROM article WHERE idArticle = ?";
+            PreparedStatement sqlPrepare = connection.prepareStatement(sql);
+            sqlPrepare.setInt(1, this.idArticle);
+
+            int nombreLigne = sqlPrepare.executeUpdate();
+            return nombreLigne > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean modificationArticle() {
+        try {
+            Connection connection = Database.getConnection();
+            String sql = "UPDATE article SET"
+                    + " nom = ?,"
+                    + " prix = ?,"
+                    + " code = ?,"
+                    + " quantite = ?,"
+                    + " idCategorie = ?"
+                    + " WHERE idArticle = ?";
+            PreparedStatement sqlPrepare = connection.prepareStatement(sql);
+            sqlPrepare.setString(1, this.nom);
+            sqlPrepare.setDouble(2, this.prix);
+            sqlPrepare.setString(3, this.code);
+            sqlPrepare.setInt(4, this.quantite);
+            sqlPrepare.setInt(5, categorie.getIdCategorie());
+            sqlPrepare.setInt(6, this.idArticle);
+
+            int nombreLigne = sqlPrepare.executeUpdate();
+            return nombreLigne > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+}
