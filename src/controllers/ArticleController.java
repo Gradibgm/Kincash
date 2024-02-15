@@ -77,12 +77,27 @@ public class ArticleController implements Initializable {
             showArlertError("Veillez choisir une catégorie");
             return;
         }
+        
+        Article article = new Article(nom, prixConverti, code, quantiteConverti, categorie);
+        boolean insertion = article.insertionArticle();
+        if (insertion) {
+            showArlertInformation("Un article est ajoutée", "Enregistrement");
+        }else{
+            showArlertError("L'enregistrement a échouée");}
     }
 
     //Méthode d'affiche des alertes
     private void showArlertError(String description) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("champs vide");
+        alert.setHeaderText(null);
+        alert.setContentText(description);
+        alert.showAndWait();
+    }
+    
+    private void showArlertInformation(String description, String titre) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titre);
         alert.setHeaderText(null);
         alert.setContentText(description);
         alert.showAndWait();

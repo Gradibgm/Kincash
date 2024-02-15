@@ -21,8 +21,7 @@ public class Article {
     private int quantite;
     private Categorie categorie;
     
-    Categorie categories;
-    int idCategorie = categorie.getIdCategorie();
+
 
     public Article() {
     }
@@ -125,7 +124,7 @@ public class Article {
             sqlPrepare.setDouble(2, this.prix);
             sqlPrepare.setString(3, this.code);
             sqlPrepare.setInt(4, this.quantite);
-            sqlPrepare.setInt(5, this.idCategorie);
+            sqlPrepare.setInt(5, this.categorie.getIdCategorie());
             int nombreLigne = sqlPrepare.executeUpdate();
             return nombreLigne > 0;
 
