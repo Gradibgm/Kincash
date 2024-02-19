@@ -8,6 +8,8 @@ package modele;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -174,5 +176,49 @@ public class Article {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static ObservableList<Article> recuperationArticle() {
+        try {
+            // Création de la liste observable des Article qui sera retourner a la fin de l'execution 
+            ObservableList<Article> listArticle = FXCollections.observableArrayList();
+
+            // 1. Recupération de l'objet connection
+            Connection connection = Database.getConnection();
+            String sql = "SELECT article.*,\n"
+                    + "categorie.idCategorie,\n"
+                    + "categorie.nom AS \"nomCategorie\",\n"
+                    + "categorie.description\n"
+                    + "FROM article\n"
+                    + "INNER JOIN categorie\n"
+                    + "ON categorie.idCategorie = article.idCategorie";
+
+            PreparedStatement sqlPrepare = connection.prepareStatement(sql);
+
+            ResultSet resultat = sqlPrepare.executeQuery();
+            while (resultat.next()) {
+
+                int idArticle = resultat.getInt("idArticle");
+                String nom = resultat.getString("nom");
+                String code = resultat.getString("code");
+                String description = resultat.getString("description");
+                String nomCategorie = resultat.getString("nomCategorie");
+                int idCategorie = resultat.getInt("idCategorie");
+                double prix = resultat.getDouble("prix");
+                int quantite = resultat.getInt("quantite");
+
+                Categorie categorie = new Categorie(idCategorie, nomCategorie, description);
+
+                listArticle.add(new Article(quantite, nom, prix, code, quantite, categorie));
+            }
+
+            return listArticle;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+
+        }
+
     }
 }

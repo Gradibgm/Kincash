@@ -103,9 +103,9 @@
                            <VBox.margin>
                               <Insets />
                            </VBox.margin></TextField>
-                        <TableView prefHeight="300.0" prefWidth="462.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="tabArticle" prefHeight="300.0" prefWidth="462.0" VBox.vgrow="ALWAYS">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Nom Article" />
+                            <TableColumn fx:id="colArticle" prefWidth="75.0" text="Nom Article" />
                           </columns>
                            <VBox.margin>
                               <Insets />

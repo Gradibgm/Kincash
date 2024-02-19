@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import modele.Article;
 import modele.Categorie;
 
@@ -127,6 +128,9 @@ public class ArticleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       
+        
+        
         ObservableList<Categorie> Listcategorie = Categorie.getCategories();
         cmbCategorie.setItems(Listcategorie);
     }
