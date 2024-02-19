@@ -7,6 +7,7 @@ package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +15,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import modele.Article;
+import modele.Categorie;
 
 public class FenetrePrincipaleController implements Initializable {
 
     @FXML
     private Button btnArticle;
+
+    @FXML
+    private TableView<Article> tabArticle;
+
+    @FXML
+    private TableColumn<Article, String> colArticle;
 
     @FXML
     public void lancerCategorie(ActionEvent event) {
@@ -102,5 +114,17 @@ public class FenetrePrincipaleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        ObservableList<Article> listArticle = Article.recuperationArticle();
+        tabArticle.setItems(listArticle);
+        colArticle.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+        
+        refresh();
+
+    }
+
+    public void refresh() {
+        ObservableList<Article> listArticles = Article.recuperationArticle();
+        tabArticle.setItems(listArticles);
+        tabArticle.refresh();
     }
 }

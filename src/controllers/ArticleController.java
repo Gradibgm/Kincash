@@ -83,6 +83,7 @@ public class ArticleController implements Initializable {
         boolean insertion = article.insertionArticle();
         if (insertion) {
             showArlertInformation("Un article est ajoutée", "Enregistrement");
+            
         }else{
             showArlertError("L'enregistrement a échouée");}
     }
@@ -134,5 +135,7 @@ public class ArticleController implements Initializable {
         ObservableList<Categorie> Listcategorie = Categorie.getCategories();
         cmbCategorie.setItems(Listcategorie);
     }
+    
+    
 
 }
