@@ -64,8 +64,7 @@ public class ArticleController implements Initializable {
         if (prixConverti == null) {
             showArlertError("Veillez saisir que les valeurs numérique");
         }
-        
-        
+
         String quantite = txtQuantite.getText();
         if (quantite.isEmpty()) {
             showArlertError("veillez saisir entréé une quantités");
@@ -78,14 +77,15 @@ public class ArticleController implements Initializable {
             showArlertError("Veillez choisir une catégorie");
             return;
         }
-        
+
         Article article = new Article(nom, prixConverti, code, quantiteConverti, categorie);
         boolean insertion = article.insertionArticle();
         if (insertion) {
             showArlertInformation("Un article est ajoutée", "Enregistrement");
-            
-        }else{
-            showArlertError("L'enregistrement a échouée");}
+
+        } else {
+            showArlertError("L'enregistrement a échouée");
+        }
     }
 
     //Méthode d'affiche des alertes
@@ -96,7 +96,7 @@ public class ArticleController implements Initializable {
         alert.setContentText(description);
         alert.showAndWait();
     }
-    
+
     private void showArlertInformation(String description, String titre) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titre);
@@ -127,15 +127,12 @@ public class ArticleController implements Initializable {
         }
     }
 
+    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-        
-        
         ObservableList<Categorie> Listcategorie = Categorie.getCategories();
         cmbCategorie.setItems(Listcategorie);
     }
-    
-    
 
 }

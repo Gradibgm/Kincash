@@ -16,11 +16,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="946.0" prefWidth="1440.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FenetrePrincipaleController">
+<AnchorPane id="AnchorPane" prefHeight="946.0" prefWidth="1444.0" style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FenetrePrincipaleController">
    <children>
       <VBox layoutX="-1.0" layoutY="-2.0" prefHeight="984.0" prefWidth="1470.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
          <children>
-            <MenuBar prefHeight="15.0" prefWidth="1466.0">
+            <MenuBar prefHeight="25.0" prefWidth="1366.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Fichier">
                   <items>
@@ -117,9 +117,9 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
-                                  <MenuItem mnemonicParsing="false" text="Modifier" />
-                                  <MenuItem mnemonicParsing="false" text="Approvisionner" />
-                                  <MenuItem mnemonicParsing="false" text="Supprimer" />
+                                  <MenuItem mnemonicParsing="false" onAction="#modifierArticle" text="Modifier" />
+                                  <MenuItem mnemonicParsing="false" onAction="#approvisionnerArticle" text="Approvisionner" />
+                                  <MenuItem mnemonicParsing="false" onAction="#supprimerArticle" text="Supprimer" />
                                 </items>
                               </ContextMenu>
                            </contextMenu>

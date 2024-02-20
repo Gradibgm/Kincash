@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 
 /**
  *
@@ -33,6 +34,7 @@ public class Article {
         this.code = code;
         this.quantite = quantite;
         this.categorie = categorie;
+        
     }
 
     public Article(int idArticle, String nom, double prix, String code, int quantite, Categorie categorie) {
@@ -221,4 +223,6 @@ public class Article {
         }
 
     }
+    
+    
 }
