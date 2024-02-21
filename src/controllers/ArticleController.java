@@ -45,36 +45,36 @@ public class ArticleController implements Initializable {
 
         String nom = txtNom.getText();
         if (nom.isEmpty()) {
-            showArlertError("Veillez saisir le nom");
+            showArlertError("Veillez saisir le nom", "Champ vide");
             return;
         }
 
         String code = txtCode.getText();
         if (code.isEmpty()) {
-            showArlertError("Veillez saisir le code");
+            showArlertError("Veillez saisir le code", "Champ vide");
             return;
         }
 
         String prix = txtPrix.getText();
         if (prix.isEmpty()) {
-            showArlertError("Veillez saisir le prix");
+            showArlertError("Veillez saisir le prix", "Champ vide");
             return;
         }
         Double prixConverti = convertirStringToDouble(prix);
         if (prixConverti == null) {
-            showArlertError("Veillez saisir que les valeurs numérique");
+            showArlertError("Veillez saisir que les valeurs numérique", "Erreur");
         }
 
         String quantite = txtQuantite.getText();
         if (quantite.isEmpty()) {
-            showArlertError("veillez saisir entréé une quantités");
+            showArlertError("veillez saisir entréé une quantités", "Champ vide");
             return;
         }
         Integer quantiteConverti = convertirStringToInt(quantite);
 
         Categorie categorie = cmbCategorie.getValue();
         if (categorie == null) {
-            showArlertError("Veillez choisir une catégorie");
+            showArlertError("Veillez choisir une catégorie", "Champ vide");
             return;
         }
 
@@ -84,20 +84,20 @@ public class ArticleController implements Initializable {
             showArlertInformation("Un article est ajoutée", "Enregistrement");
 
         } else {
-            showArlertError("L'enregistrement a échouée");
+            showArlertError("L'enregistrement a échouée", "Champ vide");
         }
     }
 
     //Méthode d'affichage des alertes
-    private static void showArlertError(String description) {
+    public static void showArlertError(String description, String titre) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("champs vide");
+        alert.setTitle(titre);
         alert.setHeaderText(null);
         alert.setContentText(description);
         alert.showAndWait();
     }
 
-    private static void showArlertInformation(String description, String titre) {
+    public static void showArlertInformation(String description, String titre) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titre);
         alert.setHeaderText(null);
@@ -106,7 +106,7 @@ public class ArticleController implements Initializable {
     }
 
     //Méthode pour convertir un String en double
-    private static Double convertirStringToDouble(String valeur) {
+    public static Double convertirStringToDouble(String valeur) {
         try {
             double valeurConverti = Double.parseDouble(valeur);
             return valeurConverti;
@@ -117,7 +117,7 @@ public class ArticleController implements Initializable {
     }
 
     //Méthode pour convertir un String en int
-    private static Integer convertirStringToInt(String valeur) {
+    public static Integer convertirStringToInt(String valeur) {
         try {
             int valeurConverti = Integer.parseInt(valeur);
             return valeurConverti;
@@ -126,8 +126,6 @@ public class ArticleController implements Initializable {
             return null;
         }
     }
-
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

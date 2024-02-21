@@ -126,6 +126,12 @@ public class FenetrePrincipaleController implements Initializable {
     private void approvisionnerArticle(){
         Article articleSelected = tabArticle.getSelectionModel().getSelectedItem();
         if (articleSelected != null) {
+            try {
+                FXMLLoader appro = new FXMLLoader(getClass().getResource("/ui/Appro.fxml"));
+                Parent roo = appro.load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             
         }
     }

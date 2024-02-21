@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
  * @author omombo
  */
 public class ApproController implements Initializable {
+
     @FXML
     private Label labNomArticle;
 
@@ -30,11 +31,22 @@ public class ApproController implements Initializable {
 
     @FXML
     private void approvisionner(ActionEvent event) {
-
+        String quantite = txtQuantite.getText();
+        if (quantite.isEmpty()) {
+            ArticleController.showArlertError("Veillez saisir la quantités", "Champ vide");
+            return;
+        }
+        Integer quantiteConverti = ArticleController.convertirStringToInt(quantite);
+        if (quantiteConverti == null) {
+            ArticleController.showArlertError("Veillez saisir du numérique", "Erreur");
+        }
+        
+        
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
