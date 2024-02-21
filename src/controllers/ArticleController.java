@@ -88,8 +88,8 @@ public class ArticleController implements Initializable {
         }
     }
 
-    //Méthode d'affiche des alertes
-    private void showArlertError(String description) {
+    //Méthode d'affichage des alertes
+    private static void showArlertError(String description) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("champs vide");
         alert.setHeaderText(null);
@@ -97,7 +97,7 @@ public class ArticleController implements Initializable {
         alert.showAndWait();
     }
 
-    private void showArlertInformation(String description, String titre) {
+    private static void showArlertInformation(String description, String titre) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titre);
         alert.setHeaderText(null);
@@ -106,7 +106,7 @@ public class ArticleController implements Initializable {
     }
 
     //Méthode pour convertir un String en double
-    private Double convertirStringToDouble(String valeur) {
+    private static Double convertirStringToDouble(String valeur) {
         try {
             double valeurConverti = Double.parseDouble(valeur);
             return valeurConverti;
@@ -117,7 +117,7 @@ public class ArticleController implements Initializable {
     }
 
     //Méthode pour convertir un String en int
-    private Integer convertirStringToInt(String valeur) {
+    private static Integer convertirStringToInt(String valeur) {
         try {
             int valeurConverti = Integer.parseInt(valeur);
             return valeurConverti;

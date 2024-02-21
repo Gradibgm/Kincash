@@ -124,6 +124,10 @@ public class FenetrePrincipaleController implements Initializable {
     
     @FXML 
     private void approvisionnerArticle(){
+        Article articleSelected = tabArticle.getSelectionModel().getSelectedItem();
+        if (articleSelected != null) {
+            
+        }
     }
 
     @Override
