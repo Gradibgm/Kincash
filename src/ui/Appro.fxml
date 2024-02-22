@@ -4,19 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="141.0" prefWidth="259.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ApproController">
    <children>
-      <Label fx:id="labNomArticle" layoutX="78.0" layoutY="10.0" text="Label" />
-      <Label fx:id="labQuantite" layoutX="78.0" layoutY="38.0" text="Label" />
+      <Label fx:id="labNomArticle" layoutX="13.0" layoutY="10.0" text="Label" />
+      <Label fx:id="labQuantite" layoutX="16.0" layoutY="38.0" text="Label" />
       <TextField fx:id="txtQuantite" layoutX="10.0" layoutY="60.0" prefHeight="25.0" prefWidth="235.0" promptText="Quantité" />
       <Button layoutX="10.0" layoutY="89.0" mnemonicParsing="false" onAction="#approvisionner" prefHeight="25.0" prefWidth="172.0" text="APPROVISIONNER" />
-      <Label layoutX="14.0" layoutY="10.0" text="Article:">
-         <font>
-            <Font name="Gill Sans MT" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="14.0" layoutY="38.0" text="Quantitée" />
    </children>
 </AnchorPane>

@@ -211,7 +211,7 @@ public class Article {
 
                 Categorie categorie = new Categorie(idCategorie, nomCategorie, description);
 
-                listArticle.add(new Article(quantite, nom, prix, code, quantite, categorie));
+                listArticle.add(new Article(idArticle, nom, prix, code, quantite, categorie));
             }
 
             return listArticle;

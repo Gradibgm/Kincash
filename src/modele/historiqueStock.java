@@ -5,6 +5,8 @@
  */
 package modele;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.Date;
 
 /**
@@ -12,6 +14,7 @@ import java.util.Date;
  * @author MEGA
  */
 public class historiqueStock {
+
     private int idStock;
     private String type;
     private Date date;
@@ -41,8 +44,6 @@ public class historiqueStock {
         this.quantiteModifie = quantiteModifie;
         this.article = article;
     }
-    
-    
 
     public int getIdStock() {
         return idStock;
@@ -83,5 +84,42 @@ public class historiqueStock {
     public void setArticle(Article article) {
         this.article = article;
     }
-    
+
+    public boolean approvisionner() {
+
+        try {
+            Connection connection = Database.getConnection();
+            String Sql = "INSERT INTO `historique_stock`(`type`, `quantiteModifie`, `idArticle`) "
+                    + "VALUES (?,?,?)";
+            PreparedStatement sqlPrepare = connection.prepareStatement(Sql);
+            sqlPrepare.setString(1, this.type);
+            sqlPrepare.setInt(2, this.quantiteModifie);
+            sqlPrepare.setInt(3, this.article.getIdArticle());
+            
+            System.out.println(article.getIdArticle());
+
+            int nombreLigne = sqlPrepare.executeUpdate();
+
+            if (nombreLigne > 0) {
+
+                String sqlModification = "UPDATE article"
+                        + " SET quantite = quantite + ? "
+                        + "WHERE idArticle  = ?";
+                PreparedStatement sqlPrepereModifiecation = connection.prepareStatement(sqlModification);
+                sqlPrepereModifiecation.setInt(1, this.quantiteModifie);
+                sqlPrepereModifiecation.setInt(2, this.article.getIdArticle());
+
+                int nombreLigneModifier = sqlPrepereModifiecation.executeUpdate();
+                return nombreLigneModifier > 0;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
 }

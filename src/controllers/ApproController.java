@@ -30,7 +30,7 @@ public class ApproController implements Initializable {
 
     @FXML
     private TextField txtQuantite;
-    
+
     private Article article;
 
     @FXML
@@ -45,19 +45,24 @@ public class ApproController implements Initializable {
         if (quantiteConverti == null) {
             ArticleController.showArlertError("Veillez saisir du numérique", "Erreur");
         }
-        
+
         historiqueStock historiqueStock = new historiqueStock(typeAppro, quantiteConverti, article);
-        
+        boolean approvissionement = historiqueStock.approvisionner();
+        if (approvissionement) {
+            ArticleController.showArlertInformation("L'opération a réussie", "Approvisionnement");
+        } else {
+            ArticleController.showArlertError("L'opération a échouée", "Approvisionnement");
+        }
     }
-    
-    public void setArticle(Article articleSelected){
-        
+
+    public void setArticle(Article articleSelected) {
+
         this.article = articleSelected;
-        labNomArticle.setText(articleSelected.getNom());
-        
+        labNomArticle.setText("Article : " + articleSelected.getNom());
+
         String qauntiteConvertie = String.valueOf(articleSelected.getQuantite());
-        labQuantite.setText(qauntiteConvertie);
-        
+        labQuantite.setText("Quantités en Stock " + qauntiteConvertie);
+
     }
 
     @Override
