@@ -36,6 +36,14 @@ public class historiqueStock {
         this.article = article;
     }
 
+    public historiqueStock(String type, int quantiteModifie, Article article) {
+        this.type = type;
+        this.quantiteModifie = quantiteModifie;
+        this.article = article;
+    }
+    
+    
+
     public int getIdStock() {
         return idStock;
     }

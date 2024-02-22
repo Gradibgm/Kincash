@@ -117,8 +117,8 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
-                                  <MenuItem mnemonicParsing="false" text="Modifier" />
-                                  <MenuItem mnemonicParsing="false" text="Approvisionner" />
+                                  <MenuItem mnemonicParsing="false" onAction="#modifierArticle" text="Modifier" />
+                                  <MenuItem mnemonicParsing="false" onAction="#approvisionnerArticle" text="Approvisionner" />
                                   <MenuItem mnemonicParsing="false" onAction="#supprimerArticle" text="Supprimer" />
                                 </items>
                               </ContextMenu>

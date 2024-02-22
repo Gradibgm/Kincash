@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import modele.Article;
+import modele.historiqueStock;
 
 /**
  * FXML Controller class
@@ -28,9 +30,12 @@ public class ApproController implements Initializable {
 
     @FXML
     private TextField txtQuantite;
+    
+    private Article article;
 
     @FXML
     private void approvisionner(ActionEvent event) {
+        String typeAppro = "Entrée";
         String quantite = txtQuantite.getText();
         if (quantite.isEmpty()) {
             ArticleController.showArlertError("Veillez saisir la quantités", "Champ vide");
@@ -41,6 +46,17 @@ public class ApproController implements Initializable {
             ArticleController.showArlertError("Veillez saisir du numérique", "Erreur");
         }
         
+        historiqueStock historiqueStock = new historiqueStock(typeAppro, quantiteConverti, article);
+        
+    }
+    
+    public void setArticle(Article articleSelected){
+        
+        this.article = articleSelected;
+        labNomArticle.setText(articleSelected.getNom());
+        
+        String qauntiteConvertie = String.valueOf(articleSelected.getQuantite());
+        labQuantite.setText(qauntiteConvertie);
         
     }
 

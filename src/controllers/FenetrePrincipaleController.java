@@ -6,7 +6,6 @@
 package controllers;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,9 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -127,8 +124,22 @@ public class FenetrePrincipaleController implements Initializable {
         Article articleSelected = tabArticle.getSelectionModel().getSelectedItem();
         if (articleSelected != null) {
             try {
+                //Chargement du fichier fxml
                 FXMLLoader appro = new FXMLLoader(getClass().getResource("/ui/Appro.fxml"));
                 Parent roo = appro.load();
+                
+                //Nous récupérons le controlleur Appro afin d'envoyer l'objet article
+                ApproController approcontroller = appro.getController();
+                
+                //on passe l'objet articleSelected au controlleur de la fentre d'appro
+                approcontroller.setArticle(articleSelected);
+                
+                Scene scene = new Scene(roo);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.setTitle("Approvisionnememnt");
+                stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
