@@ -62,7 +62,14 @@ public class FenetrePrincipaleController implements Initializable {
         Stage stageClient = lancerFenetre("/ui/Gradi", "Client");
         stageClient.setResizable(false);
         stageClient.show();
+    }
 
+    @FXML
+    void lancerHistorique(ActionEvent event) {
+        Stage stageHistorique = lancerFenetre("/ui/Historique.fxml", "Historique");
+        stageHistorique.setResizable(false);
+        stageHistorique.show();
+                
     }
 
     @FXML
@@ -109,31 +116,31 @@ public class FenetrePrincipaleController implements Initializable {
         }
 
     }
-    
-    @FXML 
-    private void supprimerArticle(){
-    }
-    
+
     @FXML
-    private void modifierArticle(){
-    
+    private void supprimerArticle() {
     }
-    
-    @FXML 
-    private void approvisionnerArticle(){
+
+    @FXML
+    private void modifierArticle() {
+
+    }
+
+    @FXML
+    private void approvisionnerArticle() {
         Article articleSelected = tabArticle.getSelectionModel().getSelectedItem();
         if (articleSelected != null) {
             try {
                 //Chargement du fichier fxml
                 FXMLLoader appro = new FXMLLoader(getClass().getResource("/ui/Appro.fxml"));
                 Parent roo = appro.load();
-                
+
                 //Nous récupérons le controlleur Appro afin d'envoyer l'objet article
                 ApproController approcontroller = appro.getController();
-                
+
                 //on passe l'objet articleSelected au controlleur de la fentre d'appro
                 approcontroller.setArticle(articleSelected);
-                
+
                 Scene scene = new Scene(roo);
                 Stage stage = new Stage();
                 stage.setScene(scene);
@@ -143,7 +150,7 @@ public class FenetrePrincipaleController implements Initializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
+
         }
     }
 

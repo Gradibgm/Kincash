@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="controllers.HistoriqueController">
+   <children>
+      <TabPane layoutX="2.0" prefHeight="394.0" prefWidth="596.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0">
+        <tabs>
+          <Tab text="Stock des produits">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabArticle" layoutX="14.0" layoutY="37.0" prefHeight="273.0" prefWidth="576.0">
+                          <columns>
+                            <TableColumn fx:id="colNom" prefWidth="123.0" text="Nom" />
+                            <TableColumn fx:id="colPrix" minWidth="6.0" prefWidth="106.0" text="Prix" />
+                              <TableColumn fx:id="colQuantite" prefWidth="135.0" text="Quantité" />
+                              <TableColumn fx:id="colTotal" prefWidth="211.0" text="Total" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="txtRecherche" layoutX="14.0" layoutY="6.0" prefHeight="25.0" prefWidth="279.0" promptText="Recherche" />
+                        <Button layoutX="523.0" layoutY="319.0" mnemonicParsing="false" onAction="#imprimer" text="Imprimer" />
+                        <Label fx:id="labNombre" layoutX="14.0" layoutY="323.0" text="Label" />
+                        <Button layoutX="302.0" layoutY="6.0" mnemonicParsing="false" onAction="#recherche" prefHeight="25.0" prefWidth="122.0" text="Rechercher" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Historique d'approvisionnement">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <DatePicker fx:id="dpDateRecherche" layoutX="7.0" layoutY="10.0" prefHeight="25.0" prefWidth="293.0" />
+                        <Button layoutX="326.0" layoutY="10.0" mnemonicParsing="false" onAction="#rechercher" prefHeight="25.0" prefWidth="107.0" text="Recherche" />
+                        <TableView fx:id="tabHistorique" layoutX="7.0" layoutY="48.0" prefHeight="266.0" prefWidth="581.0">
+                          <columns>
+                            <TableColumn fx:id="colArticle" prefWidth="133.0" text="Article" />
+                            <TableColumn fx:id="colType" prefWidth="138.0" text="type Transaction" />
+                              <TableColumn fx:id="colQuantiteModifier" minWidth="0.0" prefWidth="145.0" text="Qtes Modifier" />
+                              <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="164.0" text="Date transaction" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="498.0" layoutY="326.0" mnemonicParsing="false" onAction="#imprimerHistorique" prefHeight="25.0" prefWidth="90.0" text="Imprimer" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

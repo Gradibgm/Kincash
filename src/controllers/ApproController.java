@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import modele.Article;
 import modele.historiqueStock;
 
@@ -50,6 +51,11 @@ public class ApproController implements Initializable {
         boolean approvissionement = historiqueStock.approvisionner();
         if (approvissionement) {
             ArticleController.showArlertInformation("L'opération a réussie", "Approvisionnement");
+            
+            //Fermeture d'une fenetre
+            Stage appro = (Stage) labNomArticle.getScene().getWindow();
+            appro.close();
+            
         } else {
             ArticleController.showArlertError("L'opération a échouée", "Approvisionnement");
         }
@@ -62,6 +68,8 @@ public class ApproController implements Initializable {
 
         String qauntiteConvertie = String.valueOf(articleSelected.getQuantite());
         labQuantite.setText("Quantités en Stock " + qauntiteConvertie);
+        
+        
 
     }
 

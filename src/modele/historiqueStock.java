@@ -88,7 +88,13 @@ public class historiqueStock {
     public boolean approvisionner() {
 
         try {
+            
             Connection connection = Database.getConnection();
+            
+            //Début de la tansaction
+            //On désactive l'auto Enregistrement
+            connection.setAutoCommit(false);
+            
             String Sql = "INSERT INTO `historique_stock`(`type`, `quantiteModifie`, `idArticle`) "
                     + "VALUES (?,?,?)";
             PreparedStatement sqlPrepare = connection.prepareStatement(Sql);
@@ -110,6 +116,13 @@ public class historiqueStock {
                 sqlPrepereModifiecation.setInt(2, this.article.getIdArticle());
 
                 int nombreLigneModifier = sqlPrepereModifiecation.executeUpdate();
+                
+                //Validation de la transaction
+                connection.commit();
+                
+                //On réactive l'auto enregistrement
+                connection.setAutoCommit(true);
+                
                 return nombreLigneModifier > 0;
             } else {
                 return false;
