@@ -7,19 +7,26 @@ package modele;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Date;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
  * @author MEGA
  */
 public class historiqueStock {
+    
+    Categorie categorie;
+    
 
     private int idStock;
     private String type;
     private Date date;
     private int quantiteModifie;
     private Article article;
+    
 
     public historiqueStock() {
     }
@@ -88,20 +95,20 @@ public class historiqueStock {
     public boolean approvisionner() {
 
         try {
-            
+
             Connection connection = Database.getConnection();
-            
+
             //Début de la tansaction
             //On désactive l'auto Enregistrement
             connection.setAutoCommit(false);
-            
+
             String Sql = "INSERT INTO `historique_stock`(`type`, `quantiteModifie`, `idArticle`) "
                     + "VALUES (?,?,?)";
             PreparedStatement sqlPrepare = connection.prepareStatement(Sql);
             sqlPrepare.setString(1, this.type);
             sqlPrepare.setInt(2, this.quantiteModifie);
             sqlPrepare.setInt(3, this.article.getIdArticle());
-            
+
             System.out.println(article.getIdArticle());
 
             int nombreLigne = sqlPrepare.executeUpdate();
@@ -116,13 +123,13 @@ public class historiqueStock {
                 sqlPrepereModifiecation.setInt(2, this.article.getIdArticle());
 
                 int nombreLigneModifier = sqlPrepereModifiecation.executeUpdate();
-                
+
                 //Validation de la transaction
                 connection.commit();
-                
+
                 //On réactive l'auto enregistrement
                 connection.setAutoCommit(true);
-                
+
                 return nombreLigneModifier > 0;
             } else {
                 return false;
@@ -131,6 +138,41 @@ public class historiqueStock {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+
+    }
+
+    public static ObservableList<historiqueStock> getHistorique() {
+        try {
+            ObservableList<historiqueStock> listHistorique = FXCollections.observableArrayList();
+            Connection connection = Database.getConnection();
+
+            String sql = "SELECT article.*,"
+                    + " historique_stock.*,"
+                    + " historique_stock.quantiteModifie,"
+                    + " historique_stock.date\n"
+                    + "FROM article\n"
+                    + "INNER JOIN historique_stock\n"
+                    + "ON article.idArticle = historique_stock.idArticle\n"
+                    + "ORDER BY historique_stock.date DESC";
+            
+            PreparedStatement sqlPrepare = connection.prepareStatement(sql);
+            ResultSet resultat = sqlPrepare.executeQuery();
+            
+            while (resultat.next()) {                
+                int IdArticle = resultat.getInt("idArticle");
+                String nom = resultat.getString("Nom");
+                String type = resultat.getString("type");
+                int quantite = resultat.getInt("quantiteModifie");
+                Date datehistorique = resultat.getDate("date");
+                
+                Article article = new Article(IdArticle, nom);
+                listHistorique.add(new historiqueStock(type, datehistorique, quantite, article));
+            }
+            return listHistorique;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
 
     }

@@ -28,6 +28,15 @@ public class Article {
     public Article() {
     }
 
+    public Article(int idArticle, String nom) {
+        this.idArticle = idArticle;
+        this.nom = nom;
+    }
+
+    
+    
+    
+
     public Article(String nom, double prix, String code, int quantite, Categorie categorie) {
         this.nom = nom;
         this.prix = prix;

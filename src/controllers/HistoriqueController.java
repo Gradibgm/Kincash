@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modele.Article;
+import modele.historiqueStock;
 
 /**
  * FXML Controller class
@@ -52,19 +53,19 @@ public class HistoriqueController implements Initializable {
     private DatePicker dpDateRecherche;
 
     @FXML
-    private TableView<?> tabHistorique;
+    private TableView<historiqueStock> tabHistorique;
 
     @FXML
-    private TableColumn<?, ?> colArticle;
+    private TableColumn<historiqueStock, String> colArticle;
 
     @FXML
-    private TableColumn<?, ?> colType;
+    private TableColumn<historiqueStock, String> colType;
 
     @FXML
-    private TableColumn<?, ?> colQuantiteModifier;
+    private TableColumn<historiqueStock, String> colQuantiteModifier;
 
     @FXML
-    private TableColumn<?, ?> colDate;
+    private TableColumn<historiqueStock, String> colDate;
 
     @FXML
     void imprimer(ActionEvent event) {
@@ -103,6 +104,16 @@ public class HistoriqueController implements Initializable {
                     return new SimpleStringProperty(totalConverti); 
                 }
         );
+        
+        ObservableList<historiqueStock> listHistorique = historiqueStock.getHistorique();
+        tabHistorique.setItems(listHistorique);
+        colArticle.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colQuantiteModifier.setCellValueFactory(new PropertyValueFactory<>("quantiteModifie"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        
     }
+    
+    
 
 }
