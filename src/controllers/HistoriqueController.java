@@ -107,7 +107,7 @@ public class HistoriqueController implements Initializable {
         
         ObservableList<historiqueStock> listHistorique = historiqueStock.getHistorique();
         tabHistorique.setItems(listHistorique);
-        colArticle.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colArticle.setCellValueFactory(new PropertyValueFactory<>("nom"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colQuantiteModifier.setCellValueFactory(new PropertyValueFactory<>("quantiteModifie"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
