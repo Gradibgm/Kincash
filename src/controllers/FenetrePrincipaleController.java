@@ -80,6 +80,8 @@ public class FenetrePrincipaleController implements Initializable {
         stageTaux.show();
 
     }
+    
+    
 
     @FXML
     public void lancerUtilise(ActionEvent event) {
@@ -91,7 +93,9 @@ public class FenetrePrincipaleController implements Initializable {
 
     @FXML
     public void lancerVente(ActionEvent event) {
-
+        Stage stageVente = lancerFenetre("/ui/Vente.fxml", "Vente");
+        stageVente.setResizable(false);
+        stageVente.show();
     }
 
     @FXML

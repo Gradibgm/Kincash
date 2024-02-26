@@ -7,6 +7,7 @@ package modele;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Taux {
 
@@ -57,6 +58,27 @@ public class Taux {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    
+    public static Double recuperationTauxActuel() {
+        try {
+            Connection connection = Database.getConnection();
+            String sql = "SELECT * FROM taux ORDER BY idTaux DESC LIMIT 1";
+            PreparedStatement sqlPrepare = connection.prepareStatement(sql);
+            
+            ResultSet resultat = sqlPrepare.executeQuery();
+            
+            if (resultat.next()) {
+                double tauxActuel = resultat.getDouble("montant");
+                return tauxActuel;
+            }else{
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

@@ -7,6 +7,7 @@ package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import modele.Article;
 import modele.Detailvente;
 
@@ -83,7 +85,15 @@ public class VenteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        //Récupération des articles afin de les placer dans la tableview articles 
+        ObservableList<Article> listArticles = Article.recuperationArticle();
+        //Nous placons la liste dans le tableview
+        tabArticle.setItems(listArticles);
+        //configuration de collone
+        colNomArticle.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colPrixArticle.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        colQuantiteStock.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+        
     }
 
 }
