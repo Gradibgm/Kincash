@@ -7,6 +7,8 @@ package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modele.Article;
 import modele.Detailvente;
+import modele.Taux;
+import modele.Vente;
 
 public class VenteController implements Initializable {
 
@@ -26,7 +30,7 @@ public class VenteController implements Initializable {
 
     @FXML
     private TableView<Article> tabArticle;
-    
+
     @FXML
     private TableView<Detailvente> tabDetailVente;
 
@@ -62,10 +66,24 @@ public class VenteController implements Initializable {
 
     @FXML
     private Label labMontantTotalTVA;
+    //Configuration de la tableView détailVente
+    private ObservableList<Detailvente> listCommande = FXCollections.observableArrayList();
 
     @FXML
     void ajouterPanier(ActionEvent event) {
+        Article articleSelected = tabArticle.getSelectionModel().getSelectedItem();
+        
+        
 
+        if (articleSelected != null) {
+            
+            Vente vente = new Vente();
+            Detailvente detailvente = new Detailvente(1, 0, articleSelected, vente);
+            
+            //Nous rajoutons l'article selectionner dans le tableView
+            listCommande.add(detailvente);
+            tabDetailVente.setItems(listCommande);
+        }
     }
 
     @FXML
@@ -93,7 +111,46 @@ public class VenteController implements Initializable {
         colNomArticle.setCellValueFactory(new PropertyValueFactory<>("nom"));
         colPrixArticle.setCellValueFactory(new PropertyValueFactory<>("prix"));
         colQuantiteStock.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+
+        //Récupérer le taux actuel
+        double taux = Taux.recuperationTauxActuel();
+        labTaux.setText("Taux du jour  : " + String.valueOf(taux));
         
+        //Configuration des collones du tableView détailVente
+        colDetailArticle.setCellValueFactory(
+                (cell) -> {
+                    Detailvente detailvente = cell.getValue();
+                    Article article = detailvente.getArticle();
+                    String nom = article.getNom();
+                    return new SimpleStringProperty(nom);                 }
+        );
+        
+        colDetailPrixUnitaire.setCellValueFactory(
+                (cell) -> {
+                    Detailvente detailvente = cell.getValue();
+                    Article article = detailvente.getArticle();
+                    double prixUnitaire = article.getPrix();
+                    return new SimpleStringProperty(String.valueOf(prixUnitaire));  
+                }
+        );
+        
+        colDetailQuantite.setCellValueFactory(new PropertyValueFactory<>("quantiteVendu"));
+        
+        colDetailPrixTotal.setCellValueFactory(
+        
+                (cell) -> {
+                    Detailvente detailvente = cell.getValue();
+                    Article article = detailvente.getArticle();
+                    
+                    double prixTotal = article.getPrix() * detailvente.getQuantiteVendu();
+                    
+                    return new SimpleStringProperty(String.valueOf(prixTotal)); 
+                }
+        
+        );
+        
+        
+
     }
 
 }

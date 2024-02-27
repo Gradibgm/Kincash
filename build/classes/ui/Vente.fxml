@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="565.0" prefWidth="649.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="controllers.VenteController">
+<AnchorPane id="AnchorPane" prefHeight="565.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VenteController">
    <children>
       <VBox layoutX="14.0" layoutY="21.0" prefHeight="225.0" prefWidth="474.0">
          <children>
