@@ -72,17 +72,47 @@ public class VenteController implements Initializable {
     @FXML
     void ajouterPanier(ActionEvent event) {
         Article articleSelected = tabArticle.getSelectionModel().getSelectedItem();
-        
-        
 
         if (articleSelected != null) {
-            
-            Vente vente = new Vente();
-            Detailvente detailvente = new Detailvente(1, 0, articleSelected, vente);
-            
-            //Nous rajoutons l'article selectionner dans le tableView
-            listCommande.add(detailvente);
-            tabDetailVente.setItems(listCommande);
+            //Nous cherchons si l'article existe dans la commande du client 
+            Detailvente commandeExistante = null;
+
+            //Nous parcourons la liste des commandes pour chaque article s'y trouvant.
+            for (Detailvente commande : listCommande) {
+                //Nous récupérons chaque article de chaque commande et virifions si l'article
+                //Selectionné estv égal a l'un des articles de notre commande
+                if (commande.getArticle() == articleSelected) {
+                    //Nous actualisons notre commande
+                    commandeExistante = commande;
+                    //Nous arretons de comaprer chaque article tout en sortant de notre boucle
+                    break;
+                }
+            }
+
+            if (commandeExistante != null) {
+                int quantiteCommandee = commandeExistante.getQuantiteVendu() + 1;
+                int stockActuel = commandeExistante.getArticle().getQuantite();
+                double prixUnitaire = commandeExistante.getArticle().getPrix();
+
+                if (quantiteCommandee > stockActuel) {
+                    ArticleController.showArlertError("Quantité limitée à " + stockActuel, "Stock depassé");
+                    return;
+                }
+                
+                commandeExistante.setQuantiteVendu(quantiteCommandee);
+                commandeExistante.setPrixvendu(quantiteCommandee * prixUnitaire);
+                
+            } else {
+
+                Vente vente = new Vente();
+                Detailvente nouvelleCommande = new Detailvente(1, 0, articleSelected, vente);
+
+                //Nous rajoutons l'article selectionner dans le tableView
+                listCommande.add(nouvelleCommande);
+                tabDetailVente.setItems(listCommande);
+
+            }
+tabDetailVente.refresh();
         }
     }
 
@@ -115,41 +145,38 @@ public class VenteController implements Initializable {
         //Récupérer le taux actuel
         double taux = Taux.recuperationTauxActuel();
         labTaux.setText("Taux du jour  : " + String.valueOf(taux));
-        
+
         //Configuration des collones du tableView détailVente
         colDetailArticle.setCellValueFactory(
                 (cell) -> {
                     Detailvente detailvente = cell.getValue();
                     Article article = detailvente.getArticle();
                     String nom = article.getNom();
-                    return new SimpleStringProperty(nom);                 }
+                    return new SimpleStringProperty(nom);
+                }
         );
-        
+
         colDetailPrixUnitaire.setCellValueFactory(
                 (cell) -> {
                     Detailvente detailvente = cell.getValue();
                     Article article = detailvente.getArticle();
                     double prixUnitaire = article.getPrix();
-                    return new SimpleStringProperty(String.valueOf(prixUnitaire));  
+                    return new SimpleStringProperty(String.valueOf(prixUnitaire));
                 }
         );
-        
+
         colDetailQuantite.setCellValueFactory(new PropertyValueFactory<>("quantiteVendu"));
-        
+
         colDetailPrixTotal.setCellValueFactory(
-        
                 (cell) -> {
                     Detailvente detailvente = cell.getValue();
                     Article article = detailvente.getArticle();
-                    
+
                     double prixTotal = article.getPrix() * detailvente.getQuantiteVendu();
-                    
-                    return new SimpleStringProperty(String.valueOf(prixTotal)); 
+
+                    return new SimpleStringProperty(String.valueOf(prixTotal));
                 }
-        
         );
-        
-        
 
     }
 
