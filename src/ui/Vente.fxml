@@ -80,7 +80,7 @@
       </VBox>
       <Label layoutX="32.0" layoutY="484.0" text="Prix Total(FC)             :" />
       <Label layoutX="32.0" layoutY="511.0" text="Prix Total(UDS)          :" />
-      <Label layoutX="34.0" layoutY="540.0" text="Prix Total + TVA        :" />
+      <Label layoutX="34.0" layoutY="540.0" text="Prix Total - TVA        :" />
       <Label fx:id="labMontantTotalFC" layoutX="160.0" layoutY="485.0" text="0 FC" />
       <Label fx:id="labMontantTotalUSD" layoutX="160.0" layoutY="511.0" text="0 USD" />
       <Label fx:id="labMontantTotalTVA" layoutX="161.0" layoutY="542.0" text="0 FC =&gt; 0 USD" />

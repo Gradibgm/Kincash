@@ -61,7 +61,7 @@ public class Taux {
     }
     
     
-    public static Double recuperationTauxActuel() {
+    public static Taux recuperationTauxActuel() {
         try {
             Connection connection = Database.getConnection();
             String sql = "SELECT * FROM taux ORDER BY idTaux DESC LIMIT 1";
@@ -70,8 +70,9 @@ public class Taux {
             ResultSet resultat = sqlPrepare.executeQuery();
             
             if (resultat.next()) {
+                int idTaux = resultat.getInt("idTaux");
                 double tauxActuel = resultat.getDouble("montant");
-                return tauxActuel;
+                return new Taux(idTaux, tauxActuel);
             }else{
                 return null;
             }

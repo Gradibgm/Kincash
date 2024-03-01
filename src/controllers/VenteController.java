@@ -98,22 +98,60 @@ public class VenteController implements Initializable {
                     ArticleController.showArlertError("Quantité limitée à " + stockActuel, "Stock depassé");
                     return;
                 }
-                
+
                 commandeExistante.setQuantiteVendu(quantiteCommandee);
-                commandeExistante.setPrixvendu(quantiteCommandee * prixUnitaire);
-                
+                commandeExistante.setPrixvendu(articleSelected.getPrix());
+
             } else {
 
                 Vente vente = new Vente();
-                Detailvente nouvelleCommande = new Detailvente(1, 0, articleSelected, vente);
+                double PrixVendu = articleSelected.getPrix();
+                Detailvente nouvelleCommande = new Detailvente(1, PrixVendu, articleSelected, vente);
 
                 //Nous rajoutons l'article selectionner dans le tableView
                 listCommande.add(nouvelleCommande);
                 tabDetailVente.setItems(listCommande);
 
             }
-tabDetailVente.refresh();
+            
+            double montantTotal = calculMontantTotal();
+            labMontantTotalFC.setText(String.valueOf(montantTotal));
+            
+            double montantEnUSD = convertirMontantTotalEnUSD(montantTotal);
+            labMontantTotalUSD.setText(String.valueOf(montantEnUSD));
+            
+            double montantSansTVA = calculMontantTotalSansTVA(montantTotal);
+            labMontantTotalTVA.setText(String.valueOf(montantSansTVA));
+            
+            
+            tabDetailVente.refresh();
+            
         }
+
+    }
+
+    private double calculMontantTotal() {
+        double montantTotal = 0;
+
+        for (Detailvente detailvente : listCommande) {
+            double prixTotal = detailvente.getPrixvendu()*detailvente.getQuantiteVendu();
+            montantTotal = prixTotal + montantTotal;
+        }
+        return montantTotal;
+    }
+
+    private double convertirMontantTotalEnUSD(double montantTotal) {
+        Taux tauxActuel = Taux.recuperationTauxActuel();
+        double montantEnUSD = montantTotal / tauxActuel.getMontant();
+        return montantEnUSD;
+    }
+
+    private double calculMontantTotalSansTVA(double montantTotal) {
+        double tva = (montantTotal * 16) / 100;
+        double montantSansTva = montantTotal - tva;
+        
+        return montantSansTva;
+        
     }
 
     @FXML
@@ -133,6 +171,7 @@ tabDetailVente.refresh();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         //Récupération des articles afin de les placer dans la tableview articles 
         ObservableList<Article> listArticles = Article.recuperationArticle();
         //Nous placons la liste dans le tableview
@@ -143,8 +182,8 @@ tabDetailVente.refresh();
         colQuantiteStock.setCellValueFactory(new PropertyValueFactory<>("quantite"));
 
         //Récupérer le taux actuel
-        double taux = Taux.recuperationTauxActuel();
-        labTaux.setText("Taux du jour  : " + String.valueOf(taux));
+        Taux taux = Taux.recuperationTauxActuel();
+        labTaux.setText("Taux du jour  : " + String.valueOf(taux.getMontant()));
 
         //Configuration des collones du tableView détailVente
         colDetailArticle.setCellValueFactory(
@@ -177,7 +216,8 @@ tabDetailVente.refresh();
                     return new SimpleStringProperty(String.valueOf(prixTotal));
                 }
         );
-
+        
+        
     }
 
 }
