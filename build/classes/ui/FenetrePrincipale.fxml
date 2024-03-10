@@ -101,7 +101,7 @@
                            <font>
                               <Font name="Times New Roman" size="12.0" />
                            </font></Label>
-                        <TextField promptText="Recherche d'un article">
+                        <TextField fx:id="txtRechercheArticle" promptText="Recherche d'un article">
                            <font>
                               <Font name="Times New Roman" size="12.0" />
                            </font>

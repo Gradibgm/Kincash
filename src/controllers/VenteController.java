@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import modele.Article;
 import modele.Detailvente;
 import modele.Taux;
+import modele.Utilisateur;
 import modele.Vente;
 
 public class VenteController implements Initializable {
@@ -166,7 +167,23 @@ public class VenteController implements Initializable {
 
     @FXML
     void terminerVente(ActionEvent event) {
-
+        if (listCommande.isEmpty()) {
+            ArticleController.showArlertError("Commande vide, Veillez Ajouter des élément", "Commande");
+            return;
+        }
+        
+        double prixTotal = calculMontantTotal();
+        Taux taux = Taux.recuperationTauxActuel();
+        Utilisateur utilisateur = new Utilisateur(1, "", "", "");
+        
+        Vente vente  = new Vente(prixTotal, utilisateur, taux);
+        
+        boolean insererVente = vente.insertionvente(listCommande);
+        if (insererVente) {
+            ArticleController.showArlertInformation("ok", "Inserstion");
+        }else{
+        ArticleController.showArlertError("Erreur", "Insertion");
+        }
     }
 
     @Override

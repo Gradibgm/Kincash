@@ -8,6 +8,8 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +19,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import modele.Article;
 
 public class FenetrePrincipaleController implements Initializable {
 
+    Article artilce;
     @FXML
     private Button btnArticle;
 
@@ -31,6 +35,9 @@ public class FenetrePrincipaleController implements Initializable {
 
     @FXML
     private TableColumn<Article, String> colArticle;
+
+    @FXML
+    private TextField txtRechercheArticle;
 
     @FXML
     public void lancerCategorie(ActionEvent event) {
@@ -69,7 +76,7 @@ public class FenetrePrincipaleController implements Initializable {
         Stage stageHistorique = lancerFenetre("/ui/Historique.fxml", "Historique");
         stageHistorique.setResizable(false);
         stageHistorique.show();
-                
+
     }
 
     @FXML
@@ -80,8 +87,6 @@ public class FenetrePrincipaleController implements Initializable {
         stageTaux.show();
 
     }
-    
-    
 
     @FXML
     public void lancerUtilise(ActionEvent event) {
@@ -163,6 +168,38 @@ public class FenetrePrincipaleController implements Initializable {
         ObservableList<Article> listArticle = Article.recuperationArticle();
         tabArticle.setItems(listArticle);
         colArticle.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+
+        FilteredList<Article> listArticleFiltre = new FilteredList<>(listArticle, list -> true);
+
+        txtRechercheArticle.textProperty().addListener((Observable, oldValue, newValue) -> {
+            listArticleFiltre.setPredicate((article) -> {
+                
+                if (newValue.isEmpty()) {
+                    return true;
+                }
+                
+                String rechercheEnMiniscule = newValue.toLowerCase();
+                
+                String nomArticleMiniscule = article.getNom().toLowerCase();
+                String codeArticleMiniscule = article.getCode().toLowerCase();
+                
+                if (nomArticleMiniscule.contains(rechercheEnMiniscule)) {
+                    return true;
+                }else if (codeArticleMiniscule.contains(rechercheEnMiniscule)) {
+                    return true;
+                }
+                
+                return false;
+                
+            });
+
+        });
+        
+        SortedList<Article> ListeArticleTriee = new SortedList<>(listArticleFiltre);
+        
+        ListeArticleTriee.comparatorProperty().bind(tabArticle.comparatorProperty());
+        
+        tabArticle.setItems(ListeArticleTriee);
     }
 
     public void refresh() {
@@ -170,4 +207,5 @@ public class FenetrePrincipaleController implements Initializable {
         tabArticle.setItems(listArticles);
         tabArticle.refresh();
     }
+
 }
