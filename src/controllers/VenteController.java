@@ -5,24 +5,37 @@
  */
 package controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import modele.Article;
 import modele.Detailvente;
 import modele.Taux;
 import modele.Utilisateur;
 import modele.Vente;
+import org.icepdf.ri.common.ComponentKeyBinding;
+import org.icepdf.ri.common.SwingController;
+import org.icepdf.ri.common.SwingViewBuilder;
 
 public class VenteController implements Initializable {
 
@@ -184,6 +197,39 @@ public class VenteController implements Initializable {
         }else{
         ArticleController.showArlertError("Erreur", "Insertion");
         }
+    }
+    
+    private static void previewRepport(File file){
+    
+        try {
+            SwingNode swingNode = new SwingNode();
+            StackPane stackPane = new StackPane();
+            JScrollPane scrollPane = new JScrollPane();
+            SwingController controller = new SwingController();
+            SwingViewBuilder viewBuilder = new SwingViewBuilder(controller);
+            
+            JPanel panel  = viewBuilder.buildViewerPanel();
+            ComponentKeyBinding.install(controller, scrollPane);
+            scrollPane.setViewportView(panel);
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                   swingNode.setContent(panel);
+                }
+            });
+            
+            stackPane.getChildren().add(swingNode);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(stackPane, 250, 150));
+            stage.setMaximized(true);
+            stage.setTitle("Report viewr");
+            stage.show();
+            controller.openDocument(new FileInputStream(file), null, null);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    
+    
     }
 
     @Override
