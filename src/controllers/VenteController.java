@@ -207,7 +207,7 @@ public class VenteController implements Initializable {
             ArticleController.showArlertError("Erreur", "Insertion");
         }
     }
-
+    //Méthode d'impression
     private void imprimer() {
         try {
             //1. Chargement du fichier Jrxml
@@ -257,9 +257,10 @@ public class VenteController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //Fin script
     }
-
-    private static void previewRepport(File file) {
+    //Méthode pour le lancement de la fenetre d'impression
+    public static void previewRepport(File file) {
 
         try {
             SwingNode swingNode = new SwingNode();
@@ -288,6 +289,8 @@ public class VenteController implements Initializable {
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         }
+        
+        //fin script
 
     }
 

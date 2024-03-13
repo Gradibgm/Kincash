@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="KinCash.jar" size="1178151" download="eager" />
+    <jar href="KinCash.jar" size="1182880" download="eager" />
     <jar href="lib\bcprov-jdk14-138.jar" size="1551468" download="eager" />
     <jar href="lib\bctsp-jdk14-1.38.jar" size="22994" download="eager" />
     <jar href="lib\castor-core-1.3.3.jar" size="49513" download="eager" />

@@ -101,13 +101,23 @@
                            <font>
                               <Font name="Times New Roman" size="12.0" />
                            </font></Label>
-                        <TextField fx:id="txtRechercheArticle" promptText="Recherche d'un article">
-                           <font>
-                              <Font name="Times New Roman" size="12.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin></TextField>
+                        <HBox prefHeight="10.0" prefWidth="421.0">
+                           <children>
+                              <TextField fx:id="txtRechercheArticle" prefHeight="26.0" prefWidth="263.0" promptText="Recherche d'un article">
+                                 <font>
+                                    <Font name="Times New Roman" size="12.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button mnemonicParsing="false" onAction="#ImprimerArticle" prefHeight="4.0" prefWidth="88.0" text="Imprimer">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                         <TableView fx:id="tabArticle" prefHeight="300.0" prefWidth="462.0" VBox.vgrow="ALWAYS">
                           <columns>
                             <TableColumn fx:id="colArticle" prefWidth="75.0" text="Nom Article" />

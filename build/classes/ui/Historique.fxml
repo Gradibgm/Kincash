@@ -10,8 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="controllers.HistoriqueController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HistoriqueController">
    <children>
       <TabPane layoutX="2.0" prefHeight="394.0" prefWidth="596.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0">
         <tabs>
@@ -19,7 +18,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tabArticle" layoutX="14.0" layoutY="37.0" prefHeight="273.0" prefWidth="576.0">
+                        <TableView fx:id="tabArticleHistorique" layoutX="14.0" layoutY="37.0" prefHeight="273.0" prefWidth="576.0">
                           <columns>
                             <TableColumn fx:id="colNom" prefWidth="123.0" text="Nom" />
                             <TableColumn fx:id="colPrix" minWidth="6.0" prefWidth="106.0" text="Prix" />
@@ -28,7 +27,7 @@
                           </columns>
                         </TableView>
                         <TextField fx:id="txtRecherche" layoutX="14.0" layoutY="6.0" prefHeight="25.0" prefWidth="279.0" promptText="Recherche" />
-                        <Button layoutX="523.0" layoutY="319.0" mnemonicParsing="false" onAction="#imprimer" text="Imprimer" />
+                        <Button layoutX="523.0" layoutY="319.0" mnemonicParsing="false" onAction="#imprimerHistorique" text="Imprimer" />
                         <Label fx:id="labNombre" layoutX="14.0" layoutY="323.0" text="Label" />
                         <Button layoutX="302.0" layoutY="6.0" mnemonicParsing="false" onAction="#recherche" prefHeight="25.0" prefWidth="122.0" text="Rechercher" />
                      </children>
