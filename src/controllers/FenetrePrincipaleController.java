@@ -168,38 +168,39 @@ public class FenetrePrincipaleController implements Initializable {
         ObservableList<Article> listArticle = Article.recuperationArticle();
         tabArticle.setItems(listArticle);
         colArticle.setCellValueFactory(new PropertyValueFactory<>("Nom"));
-
+        //Recherche
         FilteredList<Article> listArticleFiltre = new FilteredList<>(listArticle, list -> true);
 
         txtRechercheArticle.textProperty().addListener((Observable, oldValue, newValue) -> {
             listArticleFiltre.setPredicate((article) -> {
-                
+
                 if (newValue.isEmpty()) {
                     return true;
                 }
-                
+
                 String rechercheEnMiniscule = newValue.toLowerCase();
-                
+
                 String nomArticleMiniscule = article.getNom().toLowerCase();
                 String codeArticleMiniscule = article.getCode().toLowerCase();
-                
+
                 if (nomArticleMiniscule.contains(rechercheEnMiniscule)) {
                     return true;
-                }else if (codeArticleMiniscule.contains(rechercheEnMiniscule)) {
+                } else if (codeArticleMiniscule.contains(rechercheEnMiniscule)) {
                     return true;
                 }
-                
+
                 return false;
-                
+
             });
 
         });
-        
+
         SortedList<Article> ListeArticleTriee = new SortedList<>(listArticleFiltre);
-        
+
         ListeArticleTriee.comparatorProperty().bind(tabArticle.comparatorProperty());
-        
+
         tabArticle.setItems(ListeArticleTriee);
+        //Fin script
     }
 
     public void refresh() {
